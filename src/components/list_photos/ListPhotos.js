@@ -75,7 +75,7 @@ const ListPhotos = (props) => {
                   s={true}
                 >
                   <div className="img" onClick={() => setSelectedPhoto(photo)}>
-                    <LazyLoad once={true} height={100}>
+                    <LazyLoad once={true} height={400}>
                       <motion.img
                         src={photo.url}
                         alt={`Uploaded by ${photo.uploadedBy}`}
