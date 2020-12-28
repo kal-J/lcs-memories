@@ -1,0 +1,84 @@
+section.upload_photo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 100vw;
+
+  label {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .upload-status {
+    justify-content: center;
+    width: 80%;
+  }
+
+  .upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 80%;
+    border: 1px solid #333;
+    border-radius: 4px;
+
+    .file-name {
+      margin: 1em auto;
+    }
+
+    input {
+      display: none;
+    }
+
+    button.primary {
+      padding: 1em 2em;
+      color: #fff;
+      background-color: #333;
+      border: 0;
+    }
+    button.default {
+      padding: 1em 2em;
+      border: 1px solid #333;
+      background-color: #fff;
+      margin-right: 1em;
+    }
+  }
+}
+
+// Media Queries
+
+@media only screen and (max-width: 1200px) {
+  /*Tablets [601px -> 1200px]*/
+}
+
+@media only screen and (max-width: 600px) {
+  /*Big smartphones [450px -> 600px]*/
+
+  section.upload_photo {
+    height: 70vh;
+
+    .upload-status {
+      width: 100%;
+      margin: 0 2em;
+    }
+
+    .upload {
+      width: 95%;
+      margin: 0 2em;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  /*Small smartphones [325px -> 450px]*/
+}
+
+@media only screen and (min-width: 1201px) {
+  /* [-> 1201px]*/
+}

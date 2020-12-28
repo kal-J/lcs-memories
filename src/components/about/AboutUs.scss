@@ -1,0 +1,30 @@
+section.about_us {
+  margin: 5em 1em;
+
+  p {
+    line-height: 1.5;
+    font-size: larger;
+  }
+  
+}
+
+// Media Queries
+
+@media only screen and (max-width: 1200px) {
+  /*Tablets [601px -> 1200px]*/
+}
+
+@media only screen and (max-width: 600px) {
+  /*Big smartphones [450px -> 600px]*/
+}
+@media only screen and (max-width: 450px) {
+  /*Small smartphones [325px -> 450px]*/
+}
+
+@media only screen and (min-width: 1200px) {
+  /*Tablets [601px -> 1200px]*/
+
+  section.about_us {
+    margin: 5em;
+  }
+}

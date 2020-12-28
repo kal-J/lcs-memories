@@ -1,0 +1,65 @@
+section.create_album {
+  display: flex;
+  justify-content: center;
+
+  button {
+    padding: 0.5em;
+    margin: 1em 2em;
+    border: 1px solid #333;
+    border-radius: 4px;
+  }
+}
+
+section.list_albums {
+  display: flex;
+  flex-wrap: wrap;
+  color: #fff;
+  justify-content: center;
+
+  .album {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    margin: 1em;
+    width: 200px;
+    height: 200px;
+    background-color: #333;
+    border: 0;
+    border-radius: 4px;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+  }
+
+  .album:hover {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+}
+
+// Media Queries
+
+@media only screen and (max-width: 1200px) {
+    /*Tablets [601px -> 1200px]*/
+  }
+  
+  @media only screen and (max-width: 600px) {
+    /*Big smartphones [450px -> 600px]*/
+  }
+  @media only screen and (max-width: 450px) {
+    /*Small smartphones [325px -> 450px]*/
+  
+   
+  }
+  
+  @media only screen and (min-width: 1201px) {
+    /* [-> 1201px]*/
+
+
+  }
+  

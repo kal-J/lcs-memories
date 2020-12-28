@@ -1,0 +1,85 @@
+section.account {
+  margin-top: 5em;
+
+  p {
+    display: flex;
+    width: 80%;
+    height: 60vh;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    border: 0.05px solid #333;
+    border-radius: 4px;
+  }
+
+  .row-btn {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    button {
+      padding: 0.5em;
+      margin: 1em 2em;
+      border: 1px solid #333;
+      border-radius: 4px;
+    }
+  }
+
+  .row-account {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+    border: 0.5px solid #333;
+    border-radius: 4px;
+
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 50%;
+      padding: 0.5em 0;
+    }
+
+    span:hover {
+      cursor: pointer;
+    }
+  }
+
+  .albums,
+  .photos {
+    margin: 1em;
+  }
+}
+
+// Media queries
+
+@media only screen and (min-width: 1201px) {
+  /* -> 1200px */
+
+  section.account {
+    margin-top: 5em;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  /*Tablets [601px -> 1200px]*/
+}
+
+@media only screen and (max-width: 600px) {
+  /*Big smartphones [450px -> 600px]*/
+  section.account {
+    .row {
+      width: 100%;
+    }
+  }
+}
+@media only screen and (max-width: 450px) {
+  /*Small smartphones [325px -> 450px]*/
+
+  section.account {
+    margin-top: 4em;
+  }
+}
