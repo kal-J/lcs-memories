@@ -66,6 +66,9 @@ const ListPhotos = (props) => {
         <div className="row">
           {photos.length ? (
             photos.map((photo, index) => {
+              if (!photo.path) {
+                return '';
+              }
               return (
                 <motion.div
                   className="img-wrapper"
