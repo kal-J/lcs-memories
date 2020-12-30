@@ -1,5 +1,5 @@
 import { withRouter } from 'react-router-dom';
-import LazyLoad from 'react-lazyload';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import DownloadIcon from '@material-ui/icons/GetApp';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { connect } from 'react-redux';
@@ -12,6 +12,7 @@ import Modal from './Modal';
 import './listPhotos.scss';
 import Axios from 'axios';
 import fileDownload from 'js-file-download';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const ListPhotos = (props) => {
   const [loading, setLoading] = useState(false);
@@ -78,76 +79,77 @@ const ListPhotos = (props) => {
                   s={true}
                 >
                   <div className="img" onClick={() => setSelectedPhoto(photo)}>
-                    <LazyLoad once={true} height={400}>
-                      <motion.img
-                        src={photo.url}
-                        alt={`Uploaded by ${photo.uploadedBy}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1 }}
-                      />
-                      <div
-                        onClick={(e) => e.stopPropagation()}
-                        className="actions"
-                      >
-                        <span
-                          className="in-album"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          In {photo.album} Album
-                        </span>
-                        {isAuthenticated ? (
-                          photo.uploadedBy === user.uid ? (
-                            <span
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                deletePhoto(photo);
-                              }}
-                              title="Delete"
-                            >
-                              <DeleteIcon
-                                onClick={(e) => e.stopPropagation()}
-                                className="icon"
-                              />
-                            </span>
-                          ) : (
-                            ''
-                          )
-                        ) : (
-                          ''
-                        )}
+                    <LazyLoadImage
+                      alt={`Uploaded by ${photo.uploadedBy}`}
+                      effect="blur"
+                      src={photo.url}
+                      placeholderSrc="/images/placeholder-image.jpg"
+                      onError={(e) => {
+                        e.target.src = '/images/placeholder-image.jpg';
+                      }}
+                    />
 
-                        <span
-                          title="Download"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                          }}
-                        >
-                          <DownloadIcon
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className="actions"
+                    >
+                      <span
+                        className="in-album"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        In {photo.album} Album
+                      </span>
+                      {isAuthenticated ? (
+                        photo.uploadedBy === user.uid ? (
+                          <span
                             onClick={(e) => {
                               e.stopPropagation();
-                              console.log('\n\n Downloading file');
-
-                              Axios.get(photo.url, {
-                                responseType: 'blob',
-                              })
-                                .then((res) => {
-                                  console.log('\n\n Downloading file');
-                                  const splittedPath = photo.path.split('/');
-                                  fileDownload(
-                                    res.data,
-                                    splittedPath[splittedPath.length - 1]
-                                  );
-                                })
-                                .catch(() => {
-                                  console.log('\n\n Downloading Error');
-                                });
+                              deletePhoto(photo);
                             }}
-                            className="icon"
-                          />
-                        </span>
-                      </div>
-                    </LazyLoad>
+                            title="Delete"
+                          >
+                            <DeleteIcon
+                              onClick={(e) => e.stopPropagation()}
+                              className="icon"
+                            />
+                          </span>
+                        ) : (
+                          ''
+                        )
+                      ) : (
+                        ''
+                      )}
+
+                      <span
+                        title="Download"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <DownloadIcon
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            console.log('\n\n Downloading file');
+
+                            Axios.get(photo.url, {
+                              responseType: 'blob',
+                            })
+                              .then((res) => {
+                                console.log('\n\n Downloading file');
+                                const splittedPath = photo.path.split('/');
+                                fileDownload(
+                                  res.data,
+                                  splittedPath[splittedPath.length - 1]
+                                );
+                              })
+                              .catch(() => {
+                                console.log('\n\n Downloading Error');
+                              });
+                          }}
+                          className="icon"
+                        />
+                      </span>
+                    </div>
                   </div>
                 </motion.div>
               );

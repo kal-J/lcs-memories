@@ -1,9 +1,35 @@
 import { combineReducers } from 'redux';
 
+const getLocalAlbums = () => {
+  let local_albums = localStorage.getItem('albums');
+  if (local_albums) {
+    return JSON.parse(local_albums);
+  }
+  return local_albums;
+};
+const getLocalPhotos = () => {
+  let local_photos = localStorage.getItem('photos');
+  if (local_photos) {
+    return JSON.parse(local_photos);
+  }
+  return local_photos;
+};
+
+const setLocalPhotos = (photos) => {
+  localStorage.setItem('photos', JSON.stringify(photos));
+
+  return;
+};
+const setLocalAlbums = (albums) => {
+  localStorage.setItem('albums', JSON.stringify(albums));
+
+  return;
+};
+
 const INITIAL_STATE = {
   user: {},
-  albums: [],
-  photos: [],
+  albums: getLocalAlbums() || [],
+  photos: getLocalPhotos() || [],
 };
 
 const mainReducer = (state = INITIAL_STATE, action) => {
@@ -52,6 +78,9 @@ const mainReducer = (state = INITIAL_STATE, action) => {
         ...state,
         albums: albums,
       };
+      
+      setLocalAlbums(albums);
+
       return newState;
     }
 
@@ -62,6 +91,9 @@ const mainReducer = (state = INITIAL_STATE, action) => {
         ...state,
         photos: photos,
       };
+
+      setLocalPhotos(photos);
+
       return newState;
     }
 
