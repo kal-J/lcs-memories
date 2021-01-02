@@ -52,6 +52,9 @@ const mainReducer = (state = INITIAL_STATE, action) => {
         ...state,
         albums: albums,
       };
+
+      localStorage.setItem('albums', JSON.stringify(albums));
+
       return newState;
     }
 
@@ -62,6 +65,9 @@ const mainReducer = (state = INITIAL_STATE, action) => {
         ...state,
         photos: photos,
       };
+
+      localStorage.setItem('photos', JSON.stringify(photos));
+
       return newState;
     }
 

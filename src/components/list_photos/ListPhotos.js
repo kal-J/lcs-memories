@@ -64,94 +64,101 @@ const ListPhotos = (props) => {
           />
         )}
         <div className="row">
-          {photos.length ? (
-            photos.map((photo, index) => {
-              if (!photo.path) {
-                return '';
-              }
-              return (
-                <motion.div
-                  className="img-wrapper"
-                  key={index}
-                  layout
-                  whileHover={{ opacity: 1 }}
-                  s={true}
-                >
-                  <div className="img" onClick={() => setSelectedPhoto(photo)}>
-                    <LazyLoad once={true} height={400}>
-                      <motion.img
-                        src={photo.url}
-                        alt={`Uploaded by ${photo.uploadedBy}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1 }}
-                      />
-                      <div
-                        onClick={(e) => e.stopPropagation()}
-                        className="actions"
-                      >
-                        <span
-                          className="in-album"
+          {photos ? (
+            photos.length ? (
+              photos.map((photo, index) => {
+                if (!photo.path) {
+                  return '';
+                }
+                return (
+                  <motion.div
+                    className="img-wrapper"
+                    key={index}
+                    layout
+                    whileHover={{ opacity: 1 }}
+                    s={true}
+                  >
+                    <div
+                      className="img"
+                      onClick={() => setSelectedPhoto(photo)}
+                    >
+                      <LazyLoad once={true} height={400}>
+                        <motion.img
+                          src={photo.url}
+                          alt={`Uploaded by ${photo.uploadedBy}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 1 }}
+                        />
+                        <div
                           onClick={(e) => e.stopPropagation()}
+                          className="actions"
                         >
-                          In {photo.album} Album
-                        </span>
-                        {isAuthenticated ? (
-                          photo.uploadedBy === user.uid ? (
-                            <span
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                deletePhoto(photo);
-                              }}
-                              title="Delete"
-                            >
-                              <DeleteIcon
-                                onClick={(e) => e.stopPropagation()}
-                                className="icon"
-                              />
-                            </span>
+                          <span
+                            className="in-album"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            In {photo.album} Album
+                          </span>
+                          {isAuthenticated ? (
+                            photo.uploadedBy === user.uid ? (
+                              <span
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  deletePhoto(photo);
+                                }}
+                                title="Delete"
+                              >
+                                <DeleteIcon
+                                  onClick={(e) => e.stopPropagation()}
+                                  className="icon"
+                                />
+                              </span>
+                            ) : (
+                              ''
+                            )
                           ) : (
                             ''
-                          )
-                        ) : (
-                          ''
-                        )}
+                          )}
 
-                        <span
-                          title="Download"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                          }}
-                        >
-                          <DownloadIcon
+                          <span
+                            title="Download"
                             onClick={(e) => {
                               e.stopPropagation();
-                              console.log('\n\n Downloading file');
-
-                              Axios.get(photo.url, {
-                                responseType: 'blob',
-                              })
-                                .then((res) => {
-                                  console.log('\n\n Downloading file');
-                                  const splittedPath = photo.path.split('/');
-                                  fileDownload(
-                                    res.data,
-                                    splittedPath[splittedPath.length - 1]
-                                  );
-                                })
-                                .catch(() => {
-                                  console.log('\n\n Downloading Error');
-                                });
                             }}
-                            className="icon"
-                          />
-                        </span>
-                      </div>
-                    </LazyLoad>
-                  </div>
-                </motion.div>
-              );
-            })
+                          >
+                            <DownloadIcon
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                console.log('\n\n Downloading file');
+
+                                Axios.get(photo.url, {
+                                  responseType: 'blob',
+                                })
+                                  .then((res) => {
+                                    console.log('\n\n Downloading file');
+                                    const splittedPath = photo.path.split('/');
+                                    fileDownload(
+                                      res.data,
+                                      splittedPath[splittedPath.length - 1]
+                                    );
+                                  })
+                                  .catch(() => {
+                                    console.log('\n\n Downloading Error');
+                                  });
+                              }}
+                              className="icon"
+                            />
+                          </span>
+                        </div>
+                      </LazyLoad>
+                    </div>
+                  </motion.div>
+                );
+              })
+            ) : (
+              <p>Photos Not Available</p>
+            )
           ) : (
             <p>Photos Not Available</p>
           )}
